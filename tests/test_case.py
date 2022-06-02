@@ -50,3 +50,29 @@ class TestVowelCount:
         assert response.status_code == 200
         assert response.json == expected_words_count
 
+
+class TestSort:
+    
+    def test_sorting_words_asc(self, client):
+        input_asc = {'words': ['word', 'text', 'rice', '1usual'],
+                     'order': 'asc'}
+        expected = ['1usual', 'rice', 'text', 'word']
+        
+        response = client.post('/sort', json=input_asc)
+        
+        assert sorted(input_asc['words']) == expected
+        assert response.status_code == 200
+        assert response.json == expected
+    
+    
+    def test_sorting_words_desc(self, client):
+        input_desc = {'words': ['word', 'text', 'rice', '1usual'],
+                     'order': 'desc'}
+        expected = ['word', 'text', 'rice', '1usual']
+        
+        response = client.post('/sort', json=input_desc)
+        
+        assert sorted(input_desc['words'], reverse=True) == expected
+        assert response.status_code == 200
+        assert response.json == expected
+        
