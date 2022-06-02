@@ -1,6 +1,8 @@
-from flask import Blueprint, request, render_template, abort
+from flask import Blueprint, request, render_template, abort, jsonify
+from flaskr.case_validation import valid_string_list, valid_order_param
 
 bp = Blueprint('functions', __name__)
+
 
 @bp.route("/")
 def home_page():
@@ -10,22 +12,12 @@ def home_page():
 @bp.route("/vowel_count", methods=['POST'])
 def vowel_count():
     data = request.get_json()
-    if ('words' not in data.keys()):
-        # A required key is missing from the received json.
+    
+    if (not valid_string_list(data, 'words')):
+        # Input data is unacceptable
         abort(400)
     
     words = data['words']
-    try:
-        words_iter = iter(words)
-    except TypeError as e:
-        # The values are not within an iterable object
-        abort(400)
-    
-    non_string_values = [type(w)!=str for w in words_iter]
-    if (any(non_string_values)):
-        #The values type from the received json are not expected.
-        abort(400)
-    
     vowels = ['a','e','i','o','u']
     vowels_count = [len([v for v in word if v in vowels]) for word in words]
     
@@ -36,4 +28,14 @@ def vowel_count():
 
 @bp.route("/sort", methods=['POST'])
 def sort():
-    return "<p>Application is running with Flask!</p>"
+    data = request.get_json()
+    
+    if (not valid_string_list(data, 'words') or
+        not valid_order_param(data, 'order')):
+        # Input data is unacceptable
+        abort(400)
+    
+    words = data['words']
+    reverse = data['order'] == 'desc'
+    
+    return jsonify(sorted(words, reverse=reverse))
