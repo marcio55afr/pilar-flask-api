@@ -3,34 +3,13 @@ class TestHomePage:
     def test_home_page(self, client):
         assert client.get('/').status_code == 200
 
-
 class TestVowelCount:    
-    def test_inputs(self, client):
+    def test_status_code_400(self, client):
+        input_invalid = {'words': ['invalid list',0,2,3]}
         
-        input_none = None
-        input_empty = {}
-        input_words_none = {'words': None}
-        input_words_integers = {'words': [0,1,2,3]}
+        response= client.post('/vowel_count', json=input_invalid)
         
-        input_words_empty = {'words': []}
-        input_expected= {'words':['w1','w2']}
-
-        url = '/vowel_count'
-        
-        res_none = client.post(url, json=input_none)
-        res_empty = client.post(url, json=input_empty)
-        res_words_none = client.post(url, json=input_words_none)
-        res_input_words_empty = client.post(url, json=input_words_empty)
-        res_input_words_integers = client.post(url, json=input_words_integers)
-        res_input_expected = client.post(url, json=input_expected)
-        
-        assert res_none.status_code == 400
-        assert res_empty.status_code == 400
-        assert res_words_none.status_code == 400
-        assert res_input_words_integers.status_code == 400
-        
-        assert res_input_words_empty.status_code == 200
-        assert res_input_expected.status_code == 200
+        assert response.status_code == 400
     
     def test_counting_no_words(self, client):        
         input_no_words = {'words': []}
@@ -52,8 +31,15 @@ class TestVowelCount:
 
 
 class TestSort:
+    def test_status_code_400(self, client):
+        input_invalid = {'words': ['invalid list', 1],
+                     'order': 'asc'}
+        
+        response =  client.post('/sort', json=input_invalid)
+        
+        assert response.status_code == 400
     
-    def test_sorting_words_asc(self, client):
+    def test_sorting_asc(self, client):
         input_asc = {'words': ['word', 'text', 'rice', '1usual'],
                      'order': 'asc'}
         expected = ['1usual', 'rice', 'text', 'word']
