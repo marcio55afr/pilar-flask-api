@@ -18,14 +18,12 @@ Python >= 3.8.8
 git clone https://github.com/marcio55afr/pilar-flask-api/
 cd pilar-flask-api
 virtualenv venv
-(venv) python setup.py install
+venv\Scripts\activate
 ```
 
 ### Instalação
 ```bash
-C:\..\> git clone https://github.com/marcio55afr/pilar-flask-api/
-C:\..\> cd pilar-flask-api
-C:\..\pilar-flask-api\> python setup.py install
+python setup.py install
 ```
 
 ### Como rodar a aplicação
