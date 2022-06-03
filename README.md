@@ -13,26 +13,36 @@ POST   |  /sort
 ### Requisitos
 Python >= 3.8.8
 
+### Configuração do Ambiente
+```bash
+git clone https://github.com/marcio55afr/pilar-flask-api/
+cd pilar-flask-api
+virtualenv venv
+(venv) python setup.py install
+```
+
 ### Instalação
 ```bash
-python setup.py
+C:\..\> git clone https://github.com/marcio55afr/pilar-flask-api/
+C:\..\> cd pilar-flask-api
+C:\..\pilar-flask-api\> python setup.py install
 ```
 
 ### Como rodar a aplicação
 ```bash
- venv\Scripts\activate
-(venv) flask run
+C:\..\pilar-flask-api\> venv\Scripts\activate
+(venv) C:\..\pilar-flask-api\> flask run
 ```
 
 ### Como rodar os testes da aplicação
 ```bash
-venv\Scripts\activate
-(venv) pytest
+C:\..\pilar-flask-api\> venv\Scripts\activate
+(venv) C:\..\pilar-flask-api\> pytest
 ```
 ou
 ```bash
-venv\Scripts\activate
-(venv) pytest --cov=flaskr tests/
+C:\..\pilar-flask-api\> venv\Scripts\activate
+(venv) C:\..\pilar-flask-api\> pytest --cov=flaskr tests/
 ```
 
 ## Utilizando a aplicação
