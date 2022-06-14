@@ -48,3 +48,8 @@ C:\..\pilar-flask-api\> venv\Scripts\activate
 Com a aplicação rodando, é possível acessar as rotas criando funções e rodando-as nos arquivos de testes.
 Uma outra alternativa é utilizando alguma aplicação, como o [Postman](https://www.postman.com/),
 para fazer as requisições HTTP enviando os dados desejados com o devido método.
+
+## Objetivo
+
+O objetivo deste projeto era colocar em prática um conhecimento sobre aplicações web e sobre o framework Flask,
+além de participar de uma avaliação técnica
